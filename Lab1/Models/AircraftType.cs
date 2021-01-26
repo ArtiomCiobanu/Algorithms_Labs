@@ -2,6 +2,8 @@
 {
     public enum AircraftType
     {
-        
+        Turboprop,
+        Piston,
+        Jet
     }
 }
