@@ -16,11 +16,11 @@ namespace Lab1
             return JsonConvert.DeserializeObject<Aircraft[]>(fileText);
         }
 
-        private static void Main(string[] args)
+        private static void Main()
         {
             var aircrafts = GetAircraftsFromFile("Aircrafts.json");
 
-            //Бинарный поиск
+            //Бинарное дерево
             var tree = new BinaryTree(aircrafts.First());
             foreach (var aircraft in aircrafts)
             {
