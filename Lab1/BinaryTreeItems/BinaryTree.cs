@@ -1,32 +1,88 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lab1.Models;
 
 namespace Lab1.BinaryTreeItems
 {
     public class BinaryTree
     {
-        public BinaryTreeNode RootNode { get; set; }
+        private readonly BinaryTreeNode _rootNode;
 
-        public void Insert(BinaryTreeNode node)
+        public BinaryTree(Aircraft rootAircraft)
         {
-            var currentNode = RootNode;
+            _rootNode = new BinaryTreeNode(rootAircraft);
+        }
+
+        public void InsertNode(BinaryTreeNode node)
+        {
+            var currentNode = _rootNode;
 
             while (true)
             {
-                if (currentNode.Value.Price > node.Value.Price)
+                if (currentNode.Values
+                    .Select(v => v.Id)
+                    .Intersect(node.Values.Select(v => v.Id))
+                    .Any())
                 {
+                    return;
+                }
+
+                if (node.Index > currentNode.Index)
+                {
+                    if (currentNode.Right == null)
+                    {
+                        currentNode.Right = node;
+                        return;
+                    }
+
                     currentNode = currentNode.Right;
                 }
-                else if (currentNode.Value.Price > node.Value.Price)
+                else if (node.Index < currentNode.Index)
                 {
-                    currentNode = currentNode.Right;
+                    if (currentNode.Left == null)
+                    {
+                        currentNode.Left = node;
+                        return;
+                    }
+
+                    currentNode = currentNode.Left;
                 }
                 else
                 {
-                    Console.WriteLine("Already exists");
+                    currentNode.AddRange(node.Values);
                     break;
                 }
             }
+        }
+
+        public void InsertValue(Aircraft value)
+        {
+            InsertNode(new BinaryTreeNode(value));
+        }
+
+        public IEnumerable<Aircraft> Find(int index)
+        {
+            var currentNode = _rootNode;
+
+            while (currentNode.Index != index)
+            {
+                if (index > currentNode.Index)
+                {
+                    if (currentNode.Right != null)
+                    {
+                        currentNode = currentNode.Right;
+                    }
+                }
+                else if (index < currentNode.Index)
+                {
+                    if (currentNode.Left != null)
+                    {
+                        currentNode = currentNode.Left;
+                    }
+                }
+            }
+
+            return currentNode.Values;
         }
     }
 }
