@@ -20,8 +20,15 @@ namespace Lab1
         {
             var aircrafts = GetAircraftsFromFile("Aircrafts.json");
 
-            //Бинарное дерево
-            var tree = new BinaryTree(aircrafts.First());
+            //Линейный поиск
+            /*var aircraftById = aircrafts.FindWhere(aircraft => aircraft.Id == 5);
+            var yak40 = aircrafts.FindByName("Yakovlev 40");
+
+            Console.WriteLine(aircraftById);
+            Console.WriteLine(yak40);*/
+
+            //Поиск через бинарное дерево
+            /*var tree = new BinaryTree(aircrafts.First());
             foreach (var aircraft in aircrafts)
             {
                 tree.InsertValue(aircraft);
@@ -29,14 +36,13 @@ namespace Lab1
 
             var result = tree.Find(2940).ToArray();
 
-            Console.WriteLine(result.FirstOrDefault()?.ToString());
-            
-            //Линейный поиск
-            /*var aircraftById = aircrafts.FindWhere(aircraft => aircraft.Id == 5);
-            var yak40 = aircrafts.FindByName("Yakovlev 40");
+            Console.WriteLine(result.FirstOrDefault()?.ToString());*/
 
-            Console.WriteLine(aircraftById);
-            Console.WriteLine(yak40);*/
+            //Двоичный поиск
+            var sortedAircrafts = aircrafts.OrderBy(aircraft => aircraft.Price).ToArray();
+
+            var a = sortedAircrafts.BinarySearchPrice(2940);
+            Console.WriteLine(a.ToString());
         }
     }
 }
