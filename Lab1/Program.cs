@@ -41,8 +41,9 @@ namespace Lab1
             //Двоичный поиск
             var sortedAircrafts = aircrafts.OrderBy(aircraft => aircraft.Price).ToArray();
 
-            var a = sortedAircrafts.BinarySearchPrice(2940);
-            Console.WriteLine(a.ToString());
+            //var a = sortedAircrafts.BinarySearchPrice(2940);
+            var air = sortedAircrafts.InterpolationSearch(2940);
+            Console.WriteLine(air.ToString());
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Lab1.Models;
 
 namespace Lab1
@@ -23,7 +22,7 @@ namespace Lab1
 
         public static Aircraft FindByName(this IEnumerable<Aircraft> aircrafts, string name)
             => aircrafts.FindWhere(a => a.Name == name);
-        
+
         public static Aircraft BinarySearchPrice(this Aircraft[] collection, int price)
         {
             int leftIndex = 0;
@@ -41,6 +40,37 @@ namespace Lab1
                 {
                     leftIndex = middle;
                 }
+            }
+
+            return collection[leftIndex];
+        }
+
+        public static Aircraft InterpolationSearch(this Aircraft[] collection, int price)
+        {
+            int leftIndex = 0;
+            int rightIndex = collection.Length - 1;
+
+            double leftValue = collection[leftIndex].Price;
+            double rightValue = collection[rightIndex].Price;
+
+            while (leftIndex < rightIndex &&
+                   leftValue <= price && price <= rightValue)
+            {
+                int m = (int) Math.Ceiling(leftIndex +
+                                           (price - leftValue) * (rightIndex - leftIndex) /
+                                           (rightValue - leftValue));
+
+                if (price > leftValue)
+                {
+                    leftIndex = m + 1;
+                }
+                else
+                {
+                    rightIndex = m - 1;
+                }
+
+                leftValue = collection[leftIndex].Price;
+                rightValue = collection[rightIndex].Price;
             }
 
             return collection[leftIndex];
