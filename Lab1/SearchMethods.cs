@@ -60,13 +60,17 @@ namespace Lab1
                                            (price - leftValue) * (rightIndex - leftIndex) /
                                            (rightValue - leftValue));
 
-                if (price > leftValue)
+                if (price > collection[m].Price)
                 {
                     leftIndex = m + 1;
                 }
+                else if (price < collection[m].Price)
+                {
+                    rightIndex = m + 1;
+                }
                 else
                 {
-                    rightIndex = m - 1;
+                    return collection[m];
                 }
 
                 leftValue = collection[leftIndex].Price;
@@ -74,6 +78,64 @@ namespace Lab1
             }
 
             return collection[leftIndex];
+        }
+
+        public static Aircraft FibonacciSearch(this Aircraft[] collection, int price)
+        {
+            int length = collection.Length;
+
+            int eliminated = -1;
+
+            int left = 0;
+            int middle = 1;
+            int right = middle;
+
+            while (right < length)
+            {
+                left = middle;
+                middle = right;
+                right = left + middle;
+            }
+
+            while (middle > 1 && eliminated + left < length)
+            {
+                int index = eliminated + left;
+
+                if (collection[index].Price < price)
+                {
+                    right = middle;
+                    middle = left;
+                    left = right - middle;
+                    eliminated = index;
+                }
+                else if (collection[index].Price > price)
+                {
+                    right = left;
+                    middle -= left;
+                    left = right - middle;
+                }
+                else
+                {
+                    return collection[index];
+                }
+            }
+
+            return null;
+        }
+
+        private static int Fibonacci(int n)
+        {
+            int num1 = 0;
+            int num2 = 1;
+
+            for (int i = 2; i <= n; i++)
+            {
+                int r = num1 + num2;
+                num1 = num2;
+                num2 = r;
+            }
+
+            return num2;
         }
     }
 }
