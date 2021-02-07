@@ -72,7 +72,7 @@ namespace Lab1
                 {
                     return collection[m];
                 }
-
+ 
                 leftValue = collection[leftIndex].Price;
                 rightValue = collection[rightIndex].Price;
             }

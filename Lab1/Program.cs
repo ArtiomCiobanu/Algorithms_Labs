@@ -25,7 +25,7 @@ namespace Lab1
             var yak40 = aircrafts.FindByName("Yakovlev 40");
 
             //Console.WriteLine(aircraftById);
-            Console.WriteLine($"Линйейный поиск: {yak40}");
+            Console.WriteLine($"Линейный поиск(Найти самолёт Як-40): {yak40}");
 
             //Поиск через бинарное дерево
             var tree = new BinaryTree(aircrafts.First());
