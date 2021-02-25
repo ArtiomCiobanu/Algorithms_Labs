@@ -19,7 +19,8 @@ namespace Lab2
         private static void Main()
         {
             //BubbleSort();
-            QuickSortV4();
+            //QuickSort();
+            SelectionSort();
         }
 
         public static void BubbleSort()
@@ -45,7 +46,7 @@ namespace Lab2
             }
         }
 
-        public static void QuickSortV4()
+        public static void QuickSort()
         {
             var aircrafts = GetAircraftsFromFile("Aircrafts.json");
 
@@ -59,7 +60,7 @@ namespace Lab2
             while (areas.Any())
             {
                 var (left, right) = areas.First();
-                
+
                 var pivotIndex = (right + left) / 2;
                 var pivot = aircrafts[pivotIndex];
 
@@ -109,6 +110,29 @@ namespace Lab2
                 {
                     var area1 = new Tuple<int, int>(left, pivotIndex);
                     areas.Insert(0, area1);
+                }
+            }
+
+            foreach (var t in aircrafts)
+            {
+                Console.WriteLine(t);
+            }
+        }
+
+        public static void SelectionSort()
+        {
+            var aircrafts = GetAircraftsFromFile("Aircrafts.json");
+
+            for (int i = 0; i < aircrafts.Length; i++)
+            {
+                for (int j = i; j < aircrafts.Length; j++)
+                {
+                    if (aircrafts[j].Price < aircrafts[i].Price)
+                    {
+                        var c = aircrafts[j];
+                        aircrafts[j] = aircrafts[i];
+                        aircrafts[i] = c;
+                    }
                 }
             }
 
