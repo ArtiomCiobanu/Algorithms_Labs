@@ -21,6 +21,7 @@ namespace Lab2
             //BubbleSort();
             //QuickSort();
             SelectionSort();
+            //ShellSort();
         }
 
         public static void BubbleSort()
@@ -40,10 +41,7 @@ namespace Lab2
                 }
             }
 
-            foreach (var t in aircrafts)
-            {
-                Console.WriteLine(t);
-            }
+            aircrafts.Display();
         }
 
         public static void QuickSort()
@@ -113,10 +111,7 @@ namespace Lab2
                 }
             }
 
-            foreach (var t in aircrafts)
-            {
-                Console.WriteLine(t);
-            }
+            aircrafts.Display();
         }
 
         public static void SelectionSort()
@@ -136,10 +131,37 @@ namespace Lab2
                 }
             }
 
-            foreach (var t in aircrafts)
+            aircrafts.Display();
+        }
+
+        public static void ShellSort()
+        {
+            var aircrafts = GetAircraftsFromFile("Aircrafts.json");
+
+            for (int gap = aircrafts.Length / 2; gap > 0; gap--)
             {
-                Console.WriteLine(t);
+                for (int i = 0; i < aircrafts.Length - gap; i++)
+                {
+                    var current = aircrafts[i];
+                    var other = aircrafts[i + gap];
+
+                    if (current.Price > other.Price)
+                    {
+                        aircrafts[i + gap] = current;
+                        aircrafts[i] = other;
+                    }
+                }
             }
+
+            aircrafts.Display();
+        }
+
+        public static void HeapSort()
+        {
+        }
+
+        public static void MergeSort()
+        {
         }
     }
 }
