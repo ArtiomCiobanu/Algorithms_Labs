@@ -20,8 +20,10 @@ namespace Lab2
         {
             //BubbleSort();
             //QuickSort();
-            SelectionSort();
+            //SelectionSort();
             //ShellSort();
+
+            MergeSort();
         }
 
         public static void BubbleSort()
@@ -162,6 +164,40 @@ namespace Lab2
 
         public static void MergeSort()
         {
+            var aircrafts = GetAircraftsFromFile("Aircrafts.json");
+
+            int g = 1;
+            while (g < aircrafts.Length)
+            {
+                g *= 2;
+
+                if (g > aircrafts.Length)
+                {
+                    g = aircrafts.Length;
+                }
+
+                for (int i = 0; i <= aircrafts.Length - g; i += g)
+                {
+                    int difference = g / 2;
+
+                    var sorted = new List<Aircraft>();
+                    for (int j = i; j < i + difference; j++)
+                    {
+                        var first = aircrafts[j];
+                        var second = aircrafts[j + difference];
+
+                        sorted.InsertBeforeHighest(first);
+                        sorted.InsertBeforeHighest(second);
+                    }
+
+                    for (int j = 0; j < sorted.Count; j++)
+                    {
+                        aircrafts[i + j] = sorted[j];
+                    }
+                }
+            }
+
+            aircrafts.Display();
         }
     }
 }
