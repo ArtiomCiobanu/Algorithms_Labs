@@ -162,6 +162,11 @@ namespace Lab2
         {
         }
 
+        public static void FixHeap()
+        {
+            //Пронаться по левой половине. Сравнить с элементами 2i+1 и 2i+2. Расположить так, чтобы они были меньше корневого.
+        }
+
         public static void MergeSort()
         {
             var aircrafts = GetAircraftsFromFile("Aircrafts.json");
