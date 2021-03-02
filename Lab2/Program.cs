@@ -16,63 +16,8 @@ namespace Lab2
             return JsonConvert.DeserializeObject<Aircraft[]>(fileText);
         }
 
-        static void Sort(int[] array)
-        {
-            var length = array.Length;
-            for (int i = length / 2 - 1; i >= 0; i--)
-            {
-                Heapify(array, length, i);
-            }
-
-            array.DisplayInline();
-
-            for (int i = length - 1; i >= 0; i--)
-            {
-                int temp = array[0];
-                array[0] = array[i];
-                array[i] = temp;
-                Heapify(array, i, 0);
-            }
-        }
-
-        //Rebuilds the heap
-        static void Heapify(int[] array, int length, int i)
-        {
-            int largest = i;
-            int left = 2 * i + 1;
-            int right = 2 * i + 2;
-            if (left < length && array[left] > array[largest])
-            {
-                largest = left;
-            }
-
-            if (right < length && array[right] > array[largest])
-            {
-                largest = right;
-            }
-
-            if (largest != i)
-            {
-                int swap = array[i];
-                array[i] = array[largest];
-                array[largest] = swap;
-                Heapify(array, length, largest);
-            }
-        }
-
         public static void Main()
         {
-            //int[] arr = {74, 19, 24, 5, 8, 79, 42, 15, 20, 53, 11};
-            //Console.WriteLine("Heap Sort");
-
-            //arr.DisplayInline();
-
-            //Sort(arr);
-
-            //arr.DisplayInline();
-
-            Console.WriteLine();
-
             //BubbleSort();
             //QuickSort();
             //SelectionSort();
@@ -216,13 +161,13 @@ namespace Lab2
 
         public static void HeapSort()
         {
-            //var aircrafts = GetAircraftsFromFile("Aircrafts.json").Take(10).ToArray();
-            int[] aircrafts = {74, 19, 24, 5, 8, 79, 42, 15, 20, 53, 11};
+            var aircrafts = GetAircraftsFromFile("Aircrafts.json");
+            //int[] aircrafts = {74, 19, 24, 5, 8, 79, 42, 15, 20, 53, 11};
 
-            aircrafts.DisplayInline();
+            //aircrafts.Display();
 
             FixHeap(aircrafts, aircrafts.Length);
-            aircrafts.DisplayInline();
+            //aircrafts.DisplayInline();
 
             for (int i = aircrafts.Length - 1; i > 0; i--)
             {
@@ -230,13 +175,13 @@ namespace Lab2
                 aircrafts[0] = aircrafts[i];
                 aircrafts[i] = c;
 
-                //FixHeap(aircrafts, i);
+                FixHeap(aircrafts, i - 1);
             }
 
-            //aircrafts.Display();
+            aircrafts.Display();
         }
 
-        public static void FixHeap(int[] aircrafts, int lastHeapFixingIndex)
+        public static void FixHeap(Aircraft[] aircrafts, int lastHeapFixingIndex)
         {
             //Прогнаться по левой половине. Сравнить с элементами 2i+1 и 2i+2. Расположить так, чтобы они были меньше корневого.
 
@@ -246,14 +191,14 @@ namespace Lab2
                 int firstIndex = 2 * i + 1;
                 int secondIndex = 2 * i + 2;
 
-                if (firstIndex < aircrafts.Length && aircrafts[i] < aircrafts[firstIndex])
+                if (firstIndex < aircrafts.Length && aircrafts[i].Price < aircrafts[firstIndex].Price)
                 {
                     var c = aircrafts[i];
                     aircrafts[i] = aircrafts[firstIndex];
                     aircrafts[firstIndex] = c;
                 }
 
-                if (secondIndex < aircrafts.Length && aircrafts[i] < aircrafts[secondIndex])
+                if (secondIndex < aircrafts.Length && aircrafts[i].Price < aircrafts[secondIndex].Price)
                 {
                     var c = aircrafts[i];
                     aircrafts[i] = aircrafts[secondIndex];
