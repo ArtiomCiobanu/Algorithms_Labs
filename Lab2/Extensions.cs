@@ -17,6 +17,16 @@ namespace Lab2
             Console.WriteLine();
         }
 
+        public static void DisplayInline<T>(this IEnumerable<T> collection)
+        {
+            foreach (var element in collection)
+            {
+                Console.Write($"{element} ");
+            }
+
+            Console.WriteLine();
+        }
+
         public static void InsertBeforeHighest(this List<Aircraft> collection, Aircraft element)
         {
             int index = 0;

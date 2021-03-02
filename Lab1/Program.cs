@@ -22,7 +22,8 @@ namespace Lab1
 
             //Линейный поиск
             //var aircraftById = aircrafts.FindWhere(aircraft => aircraft.Id == 5);
-            var yak40 = aircrafts.FindByName("Yakovlev 40");
+            //var yak40 = aircrafts.FindByName("Yakovlev 40");
+            var yak40 = aircrafts.FindWhere(x => x.Price == 2940);
 
             //Console.WriteLine(aircraftById);
             Console.WriteLine($"Линейный поиск(Найти самолёт Як-40): {yak40}");
@@ -45,8 +46,8 @@ namespace Lab1
             var interpolationAircraft = sortedAircrafts.InterpolationSearch(2940);
             var fibonacciAircraft = sortedAircrafts.FibonacciSearch(2940);
 
-            Console.WriteLine($"Бинарный поиск: {binarySearchAircraft}");
-            Console.WriteLine($"Интерполяционный поиск: {interpolationAircraft}");
+            Console.WriteLine($"Binary поиск: {binarySearchAircraft}");
+            Console.WriteLine($"Interpolation поиск: {interpolationAircraft}");
             Console.WriteLine($"Поиск алгоритмом Фибоначчи: {fibonacciAircraft}");
         }
     }
