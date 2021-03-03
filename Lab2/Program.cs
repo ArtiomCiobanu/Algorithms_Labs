@@ -47,6 +47,31 @@ namespace Lab2
             aircrafts.Display();
         }
 
+        public static void InsertionSort()
+        {
+            var aircrafts = GetAircraftsFromFile("Aircrafts.json");
+
+            for (int i = 1; i < aircrafts.Length; i++)
+            {
+                for (int j = i - 1; j > 0; j--)
+                {
+                    if (aircrafts[i].Price < aircrafts[j].Price)
+                    {
+                        var current = aircrafts[i];
+
+                        for (int k = i; k > j; k--)
+                        {
+                            aircrafts[k] = aircrafts[k - 1];
+                        }
+
+                        aircrafts[j] = current;
+                    }
+                }
+            }
+
+            aircrafts.Display();
+        }
+
         public static void QuickSort()
         {
             var aircrafts = GetAircraftsFromFile("Aircrafts.json");
